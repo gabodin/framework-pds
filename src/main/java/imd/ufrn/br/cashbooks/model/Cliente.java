@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Cliente implements Serializable {
+public abstract class Cliente implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -27,13 +27,13 @@ public class Cliente implements Serializable {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
-	private List<Movimentacao> movimentacoes = new ArrayList<>();
+	protected List<Movimentacao> movimentacoes = new ArrayList<>();
 	
-	public Cliente() {
+	protected Cliente() {
 		saldo=0;
 	}
 	
-	public Cliente(Long id, double saldo, String nome, String email, String cpf, String telefone, String endereco) {
+	protected Cliente(Long id, double saldo, String nome, String email, String cpf, String telefone, String endereco) {
 		this.id = id;
 		this.saldo = saldo;
 		this.nome = nome;

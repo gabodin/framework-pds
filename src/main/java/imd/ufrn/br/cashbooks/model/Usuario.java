@@ -2,9 +2,9 @@ package imd.ufrn.br.cashbooks.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Usuario implements Serializable {
+public abstract class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -24,12 +24,13 @@ public class Usuario implements Serializable {
 	
 	protected String nome;
 	
+	@Column(nullable = false, unique = true)
 	protected String email;
 	protected double saldo;
 	protected String senha;
 
 
-	public Usuario(Long id, String nome, String email, double saldo, String senha) {
+	protected Usuario(Long id, String nome, String email, double saldo, String senha) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -37,13 +38,13 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
-	public Usuario() {
+	protected Usuario() {
 		
 	}
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "proprietario")
-	private List<Movimentacao> movimentacoes = new ArrayList<>();
+	protected List<Movimentacao> movimentacoes = new ArrayList<>();
 	
 	public List<Movimentacao> getMovimentacoes() {
 		return movimentacoes;

@@ -76,16 +76,5 @@ public class UsuarioService {
 		entity.setEmail(obj.getEmail());
 	}
 	
-	public Usuario getProprietario() {
-		Usuario proprietario;
-		try {
-			proprietario = findById(1L);
-		}
-		catch(ResourceNotFoundException e) {
-			proprietario = new Usuario();
-			repository.save(proprietario);
-		}
-		
-		return proprietario;
-	}
+	
 }
