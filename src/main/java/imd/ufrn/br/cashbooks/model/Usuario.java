@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public abstract class Usuario implements Serializable {
+public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -27,15 +27,13 @@ public abstract class Usuario implements Serializable {
 	@Column(nullable = false, unique = true)
 	protected String email;
 	protected double saldo;
-	protected String senha;
 
 
-	protected Usuario(Long id, String nome, String email, double saldo, String senha) {
+	protected Usuario(Long id, String nome, String email, double saldo) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.saldo = saldo;
-		this.senha = senha;
 	}
 
 	protected Usuario() {
@@ -59,15 +57,6 @@ public abstract class Usuario implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
 
 	public String getNome() {
 		return nome;
